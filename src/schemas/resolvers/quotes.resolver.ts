@@ -1,4 +1,3 @@
-import { getAllCategoriesService } from "../../services/category"
 import { getAllQuotesService } from "../../services/quote"
 
 export default {

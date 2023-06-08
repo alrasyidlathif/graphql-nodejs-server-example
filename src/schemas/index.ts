@@ -9,6 +9,8 @@ import usersType from './types/users.type';
 import { makeExecutableSchema, mergeSchemas } from '@graphql-tools/schema';
 import quotesResolver from './resolvers/quotes.resolver';
 import usersResolver from './resolvers/users.resolver';
+import employeeType from './types/employee.type';
+import employeeResolver from './resolvers/employee.resolver';
 
 const Query = new GraphQLObjectType({
     name: 'Query',
@@ -46,8 +48,8 @@ const Mutation = new GraphQLObjectType({
 });
 
 const quotesAndUsersSchema = makeExecutableSchema({
-    typeDefs: mergeTypeDefs([quotesType, usersType]),
-    resolvers: [quotesResolver, usersResolver]
+    typeDefs: mergeTypeDefs([quotesType, usersType, employeeType]),
+    resolvers: [quotesResolver, usersResolver, employeeResolver]
 })
 const categoriesAndProductsSchema = new GraphQLSchema({ query: Query, mutation: Mutation });
 
