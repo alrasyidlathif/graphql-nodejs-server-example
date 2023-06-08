@@ -7,7 +7,7 @@ export default {
             return await getAllEmployeesService()
         }
     },
-    Employee: {
+    Employee: { // nested query of Employee
         async todos(employee: {id: number}) { // employee as a parent parameter
             const todos = await getAllTodosService() as {userId: number}[]
             return todos.filter((todo) => todo.userId === employee.id);
