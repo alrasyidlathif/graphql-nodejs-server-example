@@ -46,7 +46,7 @@ export const getAllQuotes = () => {
     })
 }
 
-export const getAllTodos = () => {
+export const getAllTodos = (): Promise<any[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(todos)

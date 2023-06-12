@@ -1,5 +1,8 @@
-import { getAllTodosService } from "../../services/todo"
+import { getAllTodosByIdsService, getAllTodosService } from "../../services/todo"
 import { getAllEmployeesService } from "../../services/employee"
+import DataLoader from "dataloader"
+
+const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsService(ids))
 
 export default {
     Query: {
@@ -9,8 +12,11 @@ export default {
     },
     Employee: { // nested query of Employee
         async todos(employee: {id: number}) { // employee as a parent parameter
-            const todos = await getAllTodosService() as {userId: number}[]
-            return todos.filter((todo) => todo.userId === employee.id);
+            // const todos = await getAllTodosByIdsService([employee.id]) // one by one call (13 calls this case)
+            // return todos[0]
+
+            const todos = await getAllTodosByIdsServiceLoader.load(employee.id) // batching call
+            return todos
         },
     },
 }
