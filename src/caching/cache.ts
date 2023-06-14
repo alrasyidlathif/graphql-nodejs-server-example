@@ -1,3 +1,4 @@
+import { LRUMap } from "lru_map";
 import NodeCache from "node-cache";
 
 class MyCache {
@@ -64,3 +65,26 @@ export const getKeyFn = (args: GetKeyFnArgsType, additionContext: string) => {
         throw new Error('invalid args')
     }
 };
+
+class LRUCache {
+    private static instance: LRUCache
+    private mychache: LRUMap<string,any>
+
+    private constructor() {
+        this.mychache = new LRUMap(3)
+    }
+
+    public static getInstance(): LRUCache {
+        if (!LRUCache.instance) {
+            LRUCache.instance = new LRUCache()
+        }
+
+        return LRUCache.instance
+    }
+
+    getMyCache(): LRUMap<string,any> {
+        return this.mychache
+    }
+};
+
+export const lrucache = LRUCache.getInstance();

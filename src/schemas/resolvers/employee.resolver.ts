@@ -1,15 +1,21 @@
 import { getAllTodosByIdsService, getAllTodosByIdsServiceWithCache, getAllTodosService } from "../../services/todo"
 import { getAllEmployeesService, getAllEmployeesServiceWithCache } from "../../services/employee"
 import DataLoader from "dataloader"
+import { lrucache } from "../../caching/cache"
 
-// data loader (ada auto cache dari data-loadernya (?))
-const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsService(ids))
+// data loader (ada auto cache time to live forever dari data-loadernya jika default)
+// const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsService(ids)) // {cache: false}
 
-// data loader with caching
-// const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsServiceWithCache({
-//     'id': ids,
-//     'type': 'array'
-// }, 'todos'))
+// data loader with lru cache (fail idk)
+// const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsService(ids), {
+//     cacheMap: lrucache.getMyCache(),
+// })
+
+// data loader with custom caching
+const getAllTodosByIdsServiceLoader = new DataLoader((ids: number[]) => getAllTodosByIdsServiceWithCache({
+    'id': ids,
+    'type': 'array'
+}, 'todos'), {cache: false})
 
 export default {
     Query: {

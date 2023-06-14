@@ -21,6 +21,7 @@
     "express": "^4.18.2",
     "graphql": "^16.6.0",
     "graphql-yoga": "^4.0.0",
+    "lru_map": "^0.4.1",
     "node-cache": "^5.1.2"
   },
   "devDependencies": {
