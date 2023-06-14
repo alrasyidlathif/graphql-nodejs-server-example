@@ -20,7 +20,8 @@
     "dataloader": "^2.2.2",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
-    "graphql-yoga": "^4.0.0"
+    "graphql-yoga": "^4.0.0",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@graphql-tools/mock": "^9.0.0",

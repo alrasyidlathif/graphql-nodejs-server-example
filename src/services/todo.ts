@@ -1,3 +1,5 @@
+import { getKeyFn, mycache } from "../caching/cache"
+import { memoization } from "../caching/memoization"
 import { getAllTodos } from "../db/db.mock"
 
 export const getAllTodosService = async (): Promise<any[]> => {
@@ -15,3 +17,7 @@ export const getAllTodosByIdsService = async (ids: number[]): Promise<any[]> => 
     }
     return result;
 }
+
+export const getAllTodosByIdsServiceWithCache = memoization(
+    getAllTodosByIdsService, getKeyFn, mycache.getMyCache()
+)
